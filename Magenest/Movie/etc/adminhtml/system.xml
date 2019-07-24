@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="magenest" translate="label" sortOrder="10">
+            <label>Magenest</label>
+        </tab>
+
+        <section id="movie" translate="label" type="text"
+                 sortOrder="100" showInDefault="1" showInWebsite="1"
+                 showInStore="1">
+            <label>Movie</label>
+            <tab>magenest</tab>
+            <resource>Magenest_Movie::config_movie</resource>
+            <group id="moviepage" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Movie page settings</label>
+                <field id="text_field" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Text Field</label>
+                </field>
+                <field id="is_enabled" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label><![CDATA[Yes/No_Field_<strong style="color:red">abcd</strong>]]></label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="custom_select_field" translate="label" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Custom Select Field</label>
+                    <source_model>Magenest\Movie\Model\Config\Source\Custom</source_model>
+                </field>
+                <field id="rows_movie" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Rows in table “magenest_movie”</label>
+                    <frontend_model>Magenest\Movie\Block\System\Config\Form\Renderer\Config\Disable</frontend_model>
+                    <backend_model>Magenest\Movie\Model\Config\Backend\Movie</backend_model>
+                    <depends>
+                        <field id="custom_select_field">1</field>
+                    </depends>
+                </field>
+                <field id="rows_actor" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Rows in table “magenest_actor”</label>
+                    <backend_model>Magenest\Movie\Model\Config\Backend\Actor</backend_model>
+                    <frontend_model>Magenest\Movie\Block\System\Config\Form\Renderer\Config\Disable</frontend_model>
+                    <depends>
+                        <field id="custom_select_field">1</field>
+                    </depends>
+                </field>
+                <field id="listbutton" translate="label" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <frontend_model>Magenest\Movie\Block\System\Config\Form\Button</frontend_model>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

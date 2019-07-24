@@ -1,0 +1,89 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="movie_test_listing_data_source" xsi:type="string">Magenest\Movie\Model\ResourceModel\Movie\Grid\Collection</item>
+                <item name="actor_test_listing_data_source" xsi:type="string">Magenest\Movie\Model\ResourceModel\Actor\Grid\Collection</item>
+                <item name="director_test_listing_data_source" xsi:type="string">Magenest\Movie\Model\ResourceModel\Director\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+
+
+    <!-- MovieGridDataProvider -->
+    <virtualType name="MovieGridDataProvider" type="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider">
+        <arguments>
+            <argument name="collection" xsi:type="object" shared="false">Magenest\Movie\Model\ResourceModel\Movie\Collection</argument>
+            <argument name="filterPool" xsi:type="object" shared="false">MovieGridFilterPool</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="MovieGridFilterPool" type="Magento\Framework\View\Element\UiComponent\DataProvider\FilterPool">
+        <arguments>
+            <argument name="appliers" xsi:type="array">
+                <item name="regular" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\RegularFilter</item>
+                <item name="fulltext" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\FulltextFilter</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="Magenest\Movie\Model\ResourceModel\Movie\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">magenest_movie</argument>
+            <argument name="resourceModel" xsi:type="string">Magenest\Movie\Model\ResourceModel\Movie</argument>
+        </arguments>
+    </virtualType>
+
+
+    <!-- ActorGridDataProvider -->
+    <virtualType name="ActorGridDataProvider" type="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider">
+        <arguments>
+            <argument name="collection" xsi:type="object" shared="false">Magenest\Movie\Model\ResourceModel\Actor\Collection</argument>
+            <argument name="filterPool" xsi:type="object" shared="false">ActorGridFilterPool</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="ActorGridFilterPool" type="Magento\Framework\View\Element\UiComponent\DataProvider\FilterPool">
+        <arguments>
+            <argument name="appliers" xsi:type="array">
+                <item name="regular" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\RegularFilter</item>
+                <item name="fulltext" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\FulltextFilter</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="Magenest\Movie\Model\ResourceModel\Actor\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">magenest_actor</argument>
+            <argument name="resourceModel" xsi:type="string">Magenest\Movie\Model\ResourceModel\Actor</argument>
+        </arguments>
+    </virtualType>
+
+
+    <!-- DirectorGridDataProvider -->
+    <virtualType name="DirectorGridDataProvider" type="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider">
+        <arguments>
+            <argument name="collection" xsi:type="object" shared="false">Magenest\Movie\Model\ResourceModel\Director\Collection</argument>
+            <argument name="filterPool" xsi:type="object" shared="false">DirectorGridFilterPool</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="DirectorGridFilterPool" type="Magento\Framework\View\Element\UiComponent\DataProvider\FilterPool">
+        <arguments>
+            <argument name="appliers" xsi:type="array">
+                <item name="regular" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\RegularFilter</item>
+                <item name="fulltext" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\FulltextFilter</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="Magenest\Movie\Model\ResourceModel\Director\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">magenest_director</argument>
+            <argument name="resourceModel" xsi:type="string">Magenest\Movie\Model\ResourceModel\Director</argument>
+        </arguments>
+    </virtualType>
+
+</config>
