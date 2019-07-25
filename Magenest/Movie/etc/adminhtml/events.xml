@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="save_movie">
+        <observer name="save_a_movie" instance="Magenest\Movie\Observer\Backend\SaveAMovieObserver" />
+    </event>
+    <event name="admin_system_config_changed_section_movie">
+        <observer name="chang_config" instance="Magenest\Movie\Observer\Config\ChangeValue"/>
+    </event>
+</config>

@@ -4,9 +4,6 @@
     <default>
         <movie>
             <moviepage>
-                <text_field>I’m a text field</text_field>
-                <is_enabled>1</is_enabled>
-                <custom_select_field>1</custom_select_field>
             </moviepage>
         </movie>
     </default>

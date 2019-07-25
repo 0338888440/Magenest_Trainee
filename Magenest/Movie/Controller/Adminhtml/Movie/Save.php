@@ -28,15 +28,22 @@ class Save extends \Magento\Backend\App\Action
         if($data)
         {
             $id = $data['movie_id'];
-
-            $contact = $this->_movieFactory->create()->load($id);
+            $movie = $this->_movieFactory->create()->load($id);
 
             $data = array_filter($data, function($value) {return $value !== ''; });
 
-            $contact->setData($data);
-            $contact->save();
+            $movie->setData($data);
+            $movie->save();
             $this->messageManager->addSuccess(__('Successfully saved the item.'));
             $this->_objectManager->get('Magento\Backend\Model\Session')->setFormData(false);
+
+            $colNewId = $this->_movieFactory->create ()
+                    ->getCollection()->addFieldToSelect ('movie_id')
+                    ->setOrder('movie_id','DESC')
+                    ->setPageSize(1);
+            $newId = $colNewId->getFirstItem()->getData('movie_id');
+            $this->_eventManager->dispatch('save_movie',['movie_id' => $newId]);
+
             return $resultRedirect->setPath('*/*/');
         }
 
