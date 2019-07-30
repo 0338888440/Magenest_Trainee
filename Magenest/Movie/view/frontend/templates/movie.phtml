@@ -26,7 +26,7 @@
                     <?php if ($item->getData('movie_id') == $movieActor->getData ('movie_id')){?>
                         <?php foreach ($block->getActor() as $actor):?>
                             <?php if ($movieActor->getData('actor_id') == $actor->getData ('actor_id')){?>
-                                <p><?php echo $actor->getData ('name'); ?> </p>
+                                <p> <?php echo $actor->getData ('name'); ?> </p>
                                 <?php } ?>
                         <?php endforeach; }?>
                 <?php endforeach; ?>
