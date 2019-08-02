@@ -2,8 +2,6 @@
 
 namespace Magenest\Movie\Model\Config\Backend;
 
-use Magento\Framework\App\Config\ScopeConfigInterface;
-use phpDocumentor\Reflection\Types\This;
 
 class TextField extends \Magento\Framework\App\Config\Value
 {
@@ -33,9 +31,8 @@ class TextField extends \Magento\Framework\App\Config\Value
 
     public function _afterLoad()
     {
-        $value = $this->_scopeConfig->getValue('movie/moviepage/text_field', \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
-        if ($value == 'Ping')
-        {
+        $value = $this->_scopeConfig->getValue ('movie/moviepage/text_field', \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
+        if ($value == 'Ping') {
             $this->setValue ('Pong');
         }
     }

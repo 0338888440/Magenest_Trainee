@@ -1,19 +1,18 @@
-
-<?php foreach ($block->getCustomerCollection($block->getSessionID()) as $item):?>
+<?php foreach ($block->getCustomerCollection ($block->getSessionID ()) as $item): ?>
     <img src="<?php echo
-        "http://localhost/m-228/movie/index/viewfile/image/" .base64_encode ($item->getData ('avata_image'))
+        "http://localhost/m-228/movie/index/viewfile/image/" . base64_encode ($item->getData ('avata_image'))
     ?>"
          height="300" width="200">
     <p> Name:
-        <?php echo $item->getData('firstname') ?>
-        <?php echo $item->getData('lastname') ?>
+        <?php echo $item->getData ('firstname') ?>
+        <?php echo $item->getData ('lastname') ?>
     </p>
     <p> Email:
-        <?php echo $item->getData('email') ?>
+        <?php echo $item->getData ('email') ?>
     </p>
     <p> Telephone:
-        <?php foreach ($block->getAddressData($item->getData('entity_id')) as $address): ?>
-        <?php echo $address->getData('telephone') ?>
+        <?php foreach ($block->getAddressData ($item->getData ('entity_id')) as $address): ?>
+            <?php echo $address->getData ('telephone') ?>
         <?php endforeach; ?>
     </p>
 

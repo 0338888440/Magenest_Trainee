@@ -42,7 +42,7 @@ class Save extends \Magento\Backend\App\Action
                     ->setOrder('movie_id','DESC')
                     ->setPageSize(1);
             $newId = $colNewId->getFirstItem()->getData('movie_id');
-            $this->_eventManager->dispatch('save_movie',['movie_id' => $newId]);
+            $this->_eventManager->dispatch ('save_movie', ['movie_id' => $newId]);
 
             return $resultRedirect->setPath('*/*/');
         }

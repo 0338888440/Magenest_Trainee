@@ -1,6 +1,9 @@
 <?php
+
 namespace Magenest\Movie\Block;
+
 use Magento\Framework\View\Element\Template;
+
 class Movie extends Template
 {
     protected $_movie;
@@ -22,24 +25,31 @@ class Movie extends Template
         parent::__construct ($context, $data);
     }
 
-    public function getMovie(){
-        $collection = $this->_movie->create()->addFieldToSelect('*');
+    public function getMovie()
+    {
+        $collection = $this->_movie->create ()->addFieldToSelect ('*');
 
         return $collection;
     }
-    public function getActor(){
-        $collection = $this->_actor->create()->addFieldToSelect('*');
+
+    public function getActor()
+    {
+        $collection = $this->_actor->create ()->addFieldToSelect ('*');
 
 
         return $collection;
     }
-    public function getDirector(){
-        $collection = $this->_director->create()->addFieldToSelect('*');
+
+    public function getDirector()
+    {
+        $collection = $this->_director->create ()->addFieldToSelect ('*');
 
         return $collection;
     }
-    public function getMovieActor(){
-        $collection = $this->_movie_actor->create()->addFieldToSelect('*');
+
+    public function getMovieActor()
+    {
+        $collection = $this->_movie_actor->create ()->addFieldToSelect ('*');
 
         return $collection;
     }

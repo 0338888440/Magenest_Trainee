@@ -1,7 +1,10 @@
 <?php
+
 namespace Magenest\Movie\Controller\Adminhtml\Actor;
+
 use Magento\Backend\App\Action\Context;
 use Magento\Framework\View\Result\PageFactory;
+
 class Index extends \Magento\Backend\App\Action
 {
     protected $resultPageFactory = false;
@@ -11,14 +14,14 @@ class Index extends \Magento\Backend\App\Action
         \Magento\Framework\View\Result\PageFactory $resultPageFactory
     )
     {
-        parent::__construct($context);
+        parent::__construct ($context);
         $this->resultPageFactory = $resultPageFactory;
     }
 
     public function execute()
     {
-        $resultPage = $this->resultPageFactory->create();
-        $resultPage->getConfig()->getTitle()->prepend((__('Actor')));
+        $resultPage = $this->resultPageFactory->create ();
+        $resultPage->getConfig ()->getTitle ()->prepend ((__ ('Actor')));
 
         return $resultPage;
     }

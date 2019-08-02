@@ -6,17 +6,10 @@
 
 namespace Magenest\Movie\Controller\Index;
 
-use Magento\Customer\Api\AccountManagementInterface;
-use Magento\Customer\Api\AddressRepositoryInterface;
 use Magento\Customer\Api\CustomerMetadataInterface;
-use Magento\Customer\Api\CustomerRepositoryInterface;
-use Magento\Customer\Api\Data\AddressInterfaceFactory;
-use Magento\Customer\Api\Data\CustomerInterfaceFactory;
-use Magento\Customer\Model\Address\Mapper;
 use Magento\Framework\App\Action\Context;
 use Magento\Framework\Exception\NotFoundException;
 use Magento\Framework\App\Filesystem\DirectoryList;
-use Magento\Framework\DataObjectFactory;
 
 /**
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
@@ -35,8 +28,8 @@ class Viewfile extends \Magento\Framework\App\Action\Action
 
     public function __construct(
         Context $context,
-                                \Magento\Framework\Controller\Result\RawFactory $resultRawFactory,
-                                \Magento\Framework\Url\DecoderInterface $urlDecoder)
+        \Magento\Framework\Controller\Result\RawFactory $resultRawFactory,
+        \Magento\Framework\Url\DecoderInterface $urlDecoder)
     {
         parent::__construct ($context);
 

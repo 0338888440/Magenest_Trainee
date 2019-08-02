@@ -1,4 +1,5 @@
 <?php
+
 namespace Magenest\Movie\Model\Movie;
 
 use Magenest\Movie\Model\ResourceModel\Movie\CollectionFactory;
@@ -12,16 +13,16 @@ class DataProvider extends \Magento\Ui\DataProvider\AbstractDataProvider
         $name,
         $primaryFieldName,
         $requestFieldName,
-        CollectionFactory  $movie,
+        CollectionFactory $movie,
         array $meta = [],
         array $data = [])
     {
-        $this->collection = $movie->create();
-        $this->collection->getSelect()-> join(
+        $this->collection = $movie->create ();
+        $this->collection->getSelect ()->join (
             ['d' => 'magenest_director'],
             'main_table.director_id = d.director_id',
             'd.name as director_name'
         );
-        parent::__construct($name, $primaryFieldName, $requestFieldName, $meta, $data);
+        parent::__construct ($name, $primaryFieldName, $requestFieldName, $meta, $data);
     }
 }

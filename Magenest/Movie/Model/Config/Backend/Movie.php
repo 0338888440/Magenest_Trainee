@@ -2,7 +2,6 @@
 
 namespace Magenest\Movie\Model\Config\Backend;
 
-use phpDocumentor\Reflection\Types\This;
 
 class Movie extends \Magento\Framework\App\Config\Value
 {
@@ -28,9 +27,9 @@ class Movie extends \Magento\Framework\App\Config\Value
 
     public function _afterLoad()
     {
-        $temp = $this->_movie->create()->getSize();
+        $temp = $this->_movie->create ()->getSize ();
 
-        $this->setValue($temp);
+        $this->setValue ($temp);
         return $temp;
     }
 }

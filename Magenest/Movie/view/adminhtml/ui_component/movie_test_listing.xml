@@ -1,5 +1,6 @@
 <?xml version="1.0" ?>
-<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
     <argument name="data" xsi:type="array">
         <!-- Here we declare the data_source to use with the tag 'js_config', which makes the links between your grid and the database -->
         <item name="js_config" xsi:type="array">
@@ -30,7 +31,7 @@
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="component" xsi:type="string">Magento_Ui/js/grid/provider</item>
-                    <item name="update_url" xsi:type="url" path="mui/index/render" />
+                    <item name="update_url" xsi:type="url" path="mui/index/render"/>
                     <item name="storageConfig" xsi:type="array">
                         <item name="indexField" xsi:type="string">movie_id</item>
                     </item>
@@ -45,13 +46,17 @@
             <item name="config" xsi:type="array">
                 <!-- bookmark behavior -->
                 <item name="storageConfig" xsi:type="array">
-                    <item name="provider" xsi:type="string">movie_test_listing.movie_test_listing.listing_top.bookmarks</item>
+                    <item name="provider" xsi:type="string">
+                        movie_test_listing.movie_test_listing.listing_top.bookmarks
+                    </item>
                     <item name="namespace" xsi:type="string">current</item>
                 </item>
                 <item name="childDefaults" xsi:type="array">
                     <item name="controlVisibility" xsi:type="boolean">true</item>
                     <item name="storageConfig" xsi:type="array">
-                        <item name="provider" xsi:type="string">movie_test_listing.movie_test_listing.listing_top.bookmarks</item>
+                        <item name="provider" xsi:type="string">
+                            movie_test_listing.movie_test_listing.listing_top.bookmarks
+                        </item>
                         <item name="root" xsi:type="string">columns.${ $.index }</item>
                         <!-- ${ $.index } means the current column index -->
                         <!-- ${ $.storageConfig.root }: It is referring to root property of current storageConfig

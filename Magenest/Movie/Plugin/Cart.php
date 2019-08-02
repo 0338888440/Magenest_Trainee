@@ -1,4 +1,5 @@
 <?php
+
 namespace Magenest\Movie\Plugin;
 class Cart
 {

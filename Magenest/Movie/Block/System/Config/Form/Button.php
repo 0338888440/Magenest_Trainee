@@ -1,4 +1,5 @@
 <?php
+
 namespace Magenest\Movie\Block\System\Config\Form;
 
 use Magento\Framework\App\Config\ScopeConfigInterface;
@@ -9,18 +10,19 @@ class Button extends \Magento\Config\Block\System\Config\Form\Field
 
     protected function _prepareLayout()
     {
-        parent::_prepareLayout();
-            $this->setTemplate(static::BUTTON_TEMPLATE);
+        parent::_prepareLayout ();
+        $this->setTemplate (static::BUTTON_TEMPLATE);
         return $this;
     }
+
     protected function _getElementHtml(\Magento\Framework\Data\Form\Element\AbstractElement $element)
     {
-        $this->addData(
+        $this->addData (
             [
-                'id'        => 'refresh_btn',
-                'button_label'     => _('Refresh'),
+                'id' => 'refresh_btn',
+                'button_label' => _ ('Refresh'),
             ]
         );
-        return $this->_toHtml();
+        return $this->_toHtml ();
     }
 }

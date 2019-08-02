@@ -1,4 +1,5 @@
 <?php
+
 namespace Magenest\Movie\Controller\Adminhtml\Movie;
 
 class Edit extends \Magento\Backend\App\Action
@@ -13,11 +14,11 @@ class Edit extends \Magento\Backend\App\Action
         \Magento\Framework\View\Result\PageFactory $resultPageFactory)
     {
         $this->resultPageFactory = $resultPageFactory;
-        parent::__construct($context);
+        parent::__construct ($context);
     }
 
     public function execute()
     {
-        return $this->resultPageFactory->create();
+        return $this->resultPageFactory->create ();
     }
 }

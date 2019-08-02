@@ -1,36 +1,40 @@
 <?xml version="1.0"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
-    <menu> <add
-            id="Magenest_Movie::movie"
-            title="MOVIE"
-            module="Magenest_Movie"
-            sortOrder="1"
-            resource="Magenest_Movie::movie"
-    /> <add
-            id="Magenest_Movie::index"
-            title="Movie's Sub Item"
-            module="Magenest_Movie"
-            sortOrder="1"
-            parent="Magenest_Movie::movie"
-            action="movie/movie/index/"
-            resource="Magenest_Movie::index"
-    /> <add
-            id="Magenest_Movie::actor"
-            title="Actor's Sub Item"
-            module="Magenest_Movie"
-            sortOrder="11"
-            parent="Magenest_Movie::movie"
-            action="movie/actor/index/"
-            resource="Magenest_Movie::actor"
-    /><add
-            id="Magenest_Movie::director"
-            title="Director's Sub Item"
-            module="Magenest_Movie"
-            sortOrder="21"
-            parent="Magenest_Movie::movie"
-            action="movie/director/index/"
-            resource="Magenest_Movie::director"
-    />
+    <menu>
+        <add
+                id="Magenest_Movie::movie"
+                title="MOVIE"
+                module="Magenest_Movie"
+                sortOrder="1"
+                resource="Magenest_Movie::movie"
+        />
+        <add
+                id="Magenest_Movie::index"
+                title="Movie's Sub Item"
+                module="Magenest_Movie"
+                sortOrder="1"
+                parent="Magenest_Movie::movie"
+                action="movie/movie/index/"
+                resource="Magenest_Movie::index"
+        />
+        <add
+                id="Magenest_Movie::actor"
+                title="Actor's Sub Item"
+                module="Magenest_Movie"
+                sortOrder="11"
+                parent="Magenest_Movie::movie"
+                action="movie/actor/index/"
+                resource="Magenest_Movie::actor"
+        />
+        <add
+                id="Magenest_Movie::director"
+                title="Director's Sub Item"
+                module="Magenest_Movie"
+                sortOrder="21"
+                parent="Magenest_Movie::movie"
+                action="movie/director/index/"
+                resource="Magenest_Movie::director"
+        />
     </menu>
 </config>

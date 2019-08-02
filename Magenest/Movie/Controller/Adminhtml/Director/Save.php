@@ -1,4 +1,5 @@
 <?php
+
 namespace Magenest\Movie\Controller\Adminhtml\Director;
 
 class Save extends \Magento\Backend\App\Action
@@ -17,29 +18,30 @@ class Save extends \Magento\Backend\App\Action
     {
         $this->resultPageFactory = $resultPageFactory;
         $this->_directorFactory = $directorFactory;
-        parent::__construct($context);
+        parent::__construct ($context);
     }
 
     public function execute()
     {
-        $resultRedirect = $this->resultRedirectFactory->create();
-        $data = $this->getRequest()->getPostValue();
+        $resultRedirect = $this->resultRedirectFactory->create ();
+        $data = $this->getRequest ()->getPostValue ();
 
-        if($data)
-        {
+        if ($data) {
             $id = $data['director_id'];
 
-            $contact = $this->_directorFactory->create()->load($id);
+            $contact = $this->_directorFactory->create ()->load ($id);
 
-            $data = array_filter($data, function($value) {return $value !== ''; });
+            $data = array_filter ($data, function ($value) {
+                return $value !== '';
+            });
 
-            $contact->setData($data);
-            $contact->save();
-            $this->messageManager->addSuccess(__('Successfully saved the item.'));
-            $this->_objectManager->get('Magento\Backend\Model\Session')->setFormData(false);
-            return $resultRedirect->setPath('*/*/');
+            $contact->setData ($data);
+            $contact->save ();
+            $this->messageManager->addSuccess (__ ('Successfully saved the item.'));
+            $this->_objectManager->get ('Magento\Backend\Model\Session')->setFormData (false);
+            return $resultRedirect->setPath ('*/*/');
         }
 
-        return $resultRedirect->setPath('*/*/');
+        return $resultRedirect->setPath ('*/*/');
     }
 }

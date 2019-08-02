@@ -1,7 +1,8 @@
 <?php
+
 namespace Magenest\Movie\Model\Director;
+
 use Magenest\Movie\Model\ResourceModel\Director\CollectionFactory;
-use Magenest\Movie\Model\Director;
 
 class DataProvider extends \Magento\Ui\DataProvider\AbstractDataProvider
 {
@@ -15,22 +16,22 @@ class DataProvider extends \Magento\Ui\DataProvider\AbstractDataProvider
         CollectionFactory $directorCollectionFactory,
         array $meta = [],
         array $data = []
-    ){
-        $this->collection = $directorCollectionFactory->create();
-        parent::__construct($name, $primaryFieldName, $requestFieldName, $meta, $data);
+    )
+    {
+        $this->collection = $directorCollectionFactory->create ();
+        parent::__construct ($name, $primaryFieldName, $requestFieldName, $meta, $data);
     }
 
     public function getData()
     {
-        if(isset($this->_loadedData)) {
+        if (isset($this->_loadedData)) {
             return $this->_loadedData;
         }
 
-        $items = $this->collection->getItems();
+        $items = $this->collection->getItems ();
 
-        foreach($items as $director)
-        {
-            $this->_loadedData[$director->getId()] = $director->getData();
+        foreach ($items as $director) {
+            $this->_loadedData[$director->getId ()] = $director->getData ();
         }
 
         return $this->_loadedData;

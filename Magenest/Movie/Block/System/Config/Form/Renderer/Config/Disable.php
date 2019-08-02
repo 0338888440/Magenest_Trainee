@@ -1,4 +1,5 @@
 <?php
+
 namespace Magenest\Movie\Block\System\Config\Form\Renderer\Config;
 
 class Disable extends \Magento\Config\Block\System\Config\Form\Field

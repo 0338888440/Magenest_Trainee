@@ -12,21 +12,26 @@
             <label>Movie</label>
             <tab>magenest</tab>
             <resource>Magenest_Movie::config_movie</resource>
-            <group id="moviepage" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+            <group id="moviepage" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1"
+                   showInStore="1">
                 <label>Movie page settings</label>
-                <field id="text_field" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                <field id="text_field" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1"
+                       showInStore="1">
                     <label>Text Field</label>
                     <backend_model>Magenest\Movie\Model\Config\Backend\TextField</backend_model>
                 </field>
-                <field id="is_enabled" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                <field id="is_enabled" translate="label" type="select" sortOrder="30" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
                     <label><![CDATA[Yes/No_Field_<strong style="color:red">abcd</strong>]]></label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                 </field>
-                <field id="custom_select_field" translate="label" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                <field id="custom_select_field" translate="label" type="select" sortOrder="40" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
                     <label>Custom Select Field</label>
                     <source_model>Magenest\Movie\Model\Config\Source\Custom</source_model>
                 </field>
-                <field id="rows_movie" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                <field id="rows_movie" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="1"
+                       showInStore="1">
                     <label>Rows in table “magenest_movie”</label>
                     <frontend_model>Magenest\Movie\Block\System\Config\Form\Renderer\Config\Disable</frontend_model>
                     <backend_model>Magenest\Movie\Model\Config\Backend\Movie</backend_model>
@@ -34,7 +39,8 @@
                         <field id="custom_select_field">1</field>
                     </depends>
                 </field>
-                <field id="rows_actor" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+                <field id="rows_actor" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="1"
+                       showInStore="1">
                     <label>Rows in table “magenest_actor”</label>
                     <backend_model>Magenest\Movie\Model\Config\Backend\Actor</backend_model>
                     <frontend_model>Magenest\Movie\Block\System\Config\Form\Renderer\Config\Disable</frontend_model>
@@ -42,7 +48,8 @@
                         <field id="custom_select_field">1</field>
                     </depends>
                 </field>
-                <field id="listbutton" translate="label" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1">
+                <field id="listbutton" translate="label" sortOrder="70" showInDefault="1" showInWebsite="1"
+                       showInStore="1">
                     <frontend_model>Magenest\Movie\Block\System\Config\Form\Button</frontend_model>
                 </field>
             </group>

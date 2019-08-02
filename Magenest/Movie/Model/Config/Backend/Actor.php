@@ -2,8 +2,6 @@
 
 namespace Magenest\Movie\Model\Config\Backend;
 
-use phpDocumentor\Reflection\Types\This;
-
 class Actor extends \Magento\Framework\App\Config\Value
 {
     protected $_configValueFactory;

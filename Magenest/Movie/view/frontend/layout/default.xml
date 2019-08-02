@@ -6,9 +6,11 @@
             <block class="Magento\Framework\View\Element\Html\Link\Current" name="movie-link">
                 <arguments>
                     <argument name="label" translate="true"
-                              xsi:type="string">Movie</argument>
+                              xsi:type="string">Movie
+                    </argument>
                     <argument name="path"
-                              xsi:type="string">movie/index/index</argument>
+                              xsi:type="string">movie/index/index
+                    </argument>
                 </arguments>
             </block>
         </referenceBlock>

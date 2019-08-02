@@ -5,7 +5,7 @@
         <resources>
             <resource id="Magento_Backend::admin">
                 <resource id="Magenest_Movie::movie" title="Movie" sortOrder="1">
-                    <resource id="Magenest_Movie::index" title="Movie index" />
+                    <resource id="Magenest_Movie::index" title="Movie index"/>
                 </resource>
                 <resource id="Magento_Backend::stores">
                     <resource id="Magento_Backend::stores_settings">

@@ -1,34 +1,38 @@
 <?php
+
 namespace Magenest\Movie\Setup;
-use Magento\Framework\Setup\InstallSchemaInterface;
+
 use Magento\Framework\Setup\ModuleContextInterface;
 use Magento\Framework\Setup\SchemaSetupInterface;
+
 class InstallSchema implements \Magento\Framework\Setup\InstallSchemaInterface
 {
     public function install(SchemaSetupInterface $setup, ModuleContextInterface $context)
     {
         $installer = $setup;
-        $installer->startSetup();
+        $installer->startSetup ();
 
-        $this->upgradeMovie($installer);
-        $this->upgradeDirector($installer);
-        $this->upgradeActor($installer);
+        $this->upgradeMovie ($installer);
+        $this->upgradeDirector ($installer);
+        $this->upgradeActor ($installer);
         $this->upgradeMovieActor ($installer);
         $this->upgradeFKMovieDirector ($installer);
         $this->upgradeFKMovie ($installer);
         $this->upgradeFKActor ($installer);
 
-        $installer->endSetup();
+        $installer->endSetup ();
 
     }
+
     /**
      * @param SchemaSetupInterface $installer
      */
-    public function upgradeMovie($installer){
-        $connection = $installer->getConnection();
+    public function upgradeMovie($installer)
+    {
+        $connection = $installer->getConnection ();
         //Install new database table
-        $table = $installer->getConnection()->newTable($installer->getTable('magenest_movie')
-        )->addColumn(
+        $table = $installer->getConnection ()->newTable ($installer->getTable ('magenest_movie')
+        )->addColumn (
             'movie_id',
             \Magento\Framework\DB\Ddl\Table::TYPE_INTEGER,
             null, [
@@ -37,19 +41,19 @@ class InstallSchema implements \Magento\Framework\Setup\InstallSchemaInterface
             'primary' => true
         ],
             'Movie Id'
-        )->addColumn(
+        )->addColumn (
             'name',
             \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
             64,
             ['nullable' => false],
             'Name'
-        )->addColumn(
+        )->addColumn (
             'description',
             \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
             64,
             ['nullable' => false],
             'Description'
-        )->addColumn(
+        )->addColumn (
             'rating',
             \Magento\Framework\DB\Ddl\Table::TYPE_INTEGER,
             10,
@@ -58,28 +62,29 @@ class InstallSchema implements \Magento\Framework\Setup\InstallSchemaInterface
                 'unsigned' => true
             ],
             'Rating'
-        )->addColumn(
+        )->addColumn (
             'director_id',
             \Magento\Framework\DB\Ddl\Table::TYPE_INTEGER,
             10,
             [
             ],
             'Director Id'
-        )->addIndex(
+        )->addIndex (
             $installer->getIdxName
             ('magenest_movie', ['name']), ['name']
-        )
-        ;
-        $installer->getConnection()->createTable($table);
+        );
+        $installer->getConnection ()->createTable ($table);
     }
+
     /**
      * @param SchemaSetupInterface $installer
      */
-    public function upgradeDirector($installer){
-        $connection = $installer->getConnection();
+    public function upgradeDirector($installer)
+    {
+        $connection = $installer->getConnection ();
         //Install new database table
-        $table = $installer->getConnection()->newTable($installer->getTable('magenest_director'))
-            ->addColumn(
+        $table = $installer->getConnection ()->newTable ($installer->getTable ('magenest_director'))
+            ->addColumn (
                 'director_id',
                 \Magento\Framework\DB\Ddl\Table::TYPE_INTEGER,
                 10,
@@ -89,7 +94,7 @@ class InstallSchema implements \Magento\Framework\Setup\InstallSchemaInterface
                     'primary' => true
                 ],
                 'Director Id'
-            )->addColumn(
+            )->addColumn (
                 'name',
                 \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
                 255,
@@ -98,20 +103,22 @@ class InstallSchema implements \Magento\Framework\Setup\InstallSchemaInterface
                     'nullable' => false
                 ],
                 'Director Name'
-            )->addIndex(
+            )->addIndex (
                 $installer->getIdxName
                 ('magenest_director', ['name']), ['name']
             )
-            ->setComment('Director');
+            ->setComment ('Director');
 
-        $installer->getConnection()->createTable($table);
+        $installer->getConnection ()->createTable ($table);
     }
+
     /**
      * @param SchemaSetupInterface $installer
      */
-    public function upgradeActor($installer){
-        $table = $installer->getConnection()->newTable($installer->getTable('magenest_actor'))
-            ->addColumn(
+    public function upgradeActor($installer)
+    {
+        $table = $installer->getConnection ()->newTable ($installer->getTable ('magenest_actor'))
+            ->addColumn (
                 'actor_id',
                 \Magento\Framework\DB\Ddl\Table::TYPE_INTEGER,
                 10,
@@ -122,7 +129,7 @@ class InstallSchema implements \Magento\Framework\Setup\InstallSchemaInterface
                 ],
                 'Actor ID'
             )
-            ->addColumn(
+            ->addColumn (
                 'name',
                 \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
                 255,
@@ -131,21 +138,22 @@ class InstallSchema implements \Magento\Framework\Setup\InstallSchemaInterface
                     'nullable' => false
                 ],
                 'Actor Name'
-            )->addIndex(
+            )->addIndex (
                 $installer->getIdxName
                 ('magenest_actor', ['name']), ['name']
             )
-            ->setComment('Actor');
+            ->setComment ('Actor');
 
-        $installer->getConnection()->createTable($table);
+        $installer->getConnection ()->createTable ($table);
     }
 
     /**
      * @param SchemaSetupInterface $installer
      */
-    public function upgradeMovieActor($installer){
-        $table = $installer->getConnection()->newTable($installer->getTable('magenest_movie_actor'))
-            ->addColumn(
+    public function upgradeMovieActor($installer)
+    {
+        $table = $installer->getConnection ()->newTable ($installer->getTable ('magenest_movie_actor'))
+            ->addColumn (
                 'movie_id',
                 \Magento\Framework\DB\Ddl\Table::TYPE_INTEGER,
                 10,
@@ -155,7 +163,7 @@ class InstallSchema implements \Magento\Framework\Setup\InstallSchemaInterface
 
                 ],
                 'Movie ID'
-            )->addColumn(
+            )->addColumn (
                 'actor_id',
                 \Magento\Framework\DB\Ddl\Table::TYPE_INTEGER,
                 10,
@@ -164,20 +172,22 @@ class InstallSchema implements \Magento\Framework\Setup\InstallSchemaInterface
                     'nullable' => false,
                 ],
                 'Actor ID'
-            )->addIndex(
+            )->addIndex (
                 $installer->getIdxName
                 ('magenest_movie_actor', ['movie_id']), ['movie_id']
             );
-        $installer->getConnection()->createTable($table);
+        $installer->getConnection ()->createTable ($table);
     }
+
     /**
      * @param SchemaSetupInterface $installer
      */
-    public function upgradeFKMovieDirector($installer){
-        if ($installer->tableExists('magenest_director')) {
-            if ($installer->tableExists('magenest_movie')) {
-                $connection = $installer->getConnection();
-                $connection->addForeignKey($installer->getFkName(
+    public function upgradeFKMovieDirector($installer)
+    {
+        if ($installer->tableExists ('magenest_director')) {
+            if ($installer->tableExists ('magenest_movie')) {
+                $connection = $installer->getConnection ();
+                $connection->addForeignKey ($installer->getFkName (
                     'magenest_movie',
                     'director_id',
                     'magenest_director',
@@ -192,14 +202,16 @@ class InstallSchema implements \Magento\Framework\Setup\InstallSchemaInterface
             }
         }
     }
+
     /**
      * @param SchemaSetupInterface $installer
      */
-    public function upgradeFKMovie($installer){
-        if ($installer->tableExists('magenest_movie')) {
-            if ($installer->tableExists('magenest_movie_actor')) {
-                $connection = $installer->getConnection();
-                $connection->addForeignKey($installer->getFkName(
+    public function upgradeFKMovie($installer)
+    {
+        if ($installer->tableExists ('magenest_movie')) {
+            if ($installer->tableExists ('magenest_movie_actor')) {
+                $connection = $installer->getConnection ();
+                $connection->addForeignKey ($installer->getFkName (
                     'magenest_movie_actor',
                     'movie_id',
                     'magenest_movie',
@@ -214,14 +226,16 @@ class InstallSchema implements \Magento\Framework\Setup\InstallSchemaInterface
             }
         }
     }
+
     /**
      * @param SchemaSetupInterface $installer
      */
-    public function upgradeFKActor($installer){
-        if ($installer->tableExists('magenest_actor')) {
-            if ($installer->tableExists('magenest_movie_actor')) {
-                $connection = $installer->getConnection();
-                $connection->addForeignKey($installer->getFkName(
+    public function upgradeFKActor($installer)
+    {
+        if ($installer->tableExists ('magenest_actor')) {
+            if ($installer->tableExists ('magenest_movie_actor')) {
+                $connection = $installer->getConnection ();
+                $connection->addForeignKey ($installer->getFkName (
                     'magenest_movie_actor',
                     'actor_id',
                     'magenest_actor',

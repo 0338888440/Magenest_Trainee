@@ -1,7 +1,8 @@
 <?php
+
 namespace Magenest\Movie\Model\Actor;
+
 use Magenest\Movie\Model\ResourceModel\Actor\CollectionFactory;
-use Magenest\Movie\Model\Actor;
 
 class DataProvider extends \Magento\Ui\DataProvider\AbstractDataProvider
 {
@@ -15,22 +16,22 @@ class DataProvider extends \Magento\Ui\DataProvider\AbstractDataProvider
         CollectionFactory $actorCollectionFactory,
         array $meta = [],
         array $data = []
-    ){
-        $this->collection = $actorCollectionFactory->create();
-        parent::__construct($name, $primaryFieldName, $requestFieldName, $meta, $data);
+    )
+    {
+        $this->collection = $actorCollectionFactory->create ();
+        parent::__construct ($name, $primaryFieldName, $requestFieldName, $meta, $data);
     }
 
     public function getData()
     {
-        if(isset($this->_loadedData)) {
+        if (isset($this->_loadedData)) {
             return $this->_loadedData;
         }
 
-        $items = $this->collection->getItems();
+        $items = $this->collection->getItems ();
 
-        foreach($items as $actor)
-        {
-            $this->_loadedData[$actor->getId()] = $actor->getData();
+        foreach ($items as $actor) {
+            $this->_loadedData[$actor->getId ()] = $actor->getData ();
         }
 
         return $this->_loadedData;

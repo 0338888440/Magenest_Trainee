@@ -1,5 +1,7 @@
 <?php
+
 namespace Magenest\Movie\Block\Adminhtml\Movie\Edit;
+
 use Magento\Search\Block\Adminhtml\Synonyms\Edit\GenericButton;
 use Magento\Framework\View\Element\UiComponent\Control\ButtonProviderInterface;
 
@@ -8,8 +10,8 @@ class BackButton extends GenericButton implements ButtonProviderInterface
     public function getButtonData()
     {
         return [
-            'label' => __('Back'),
-            'on_click' => sprintf("location.href= '%s';", $this->getBackUrl()),
+            'label' => __ ('Back'),
+            'on_click' => sprintf ("location.href= '%s';", $this->getBackUrl ()),
             'class' => 'back',
             'sort_order' => 10
         ];
@@ -17,6 +19,6 @@ class BackButton extends GenericButton implements ButtonProviderInterface
 
     public function getBackUrl()
     {
-        return $this->getUrl('*/*/');
+        return $this->getUrl ('*/*/');
     }
 }
