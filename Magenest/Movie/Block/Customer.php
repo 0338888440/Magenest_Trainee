@@ -8,15 +8,18 @@ class Customer extends Template
     protected $_customerFactory;
     protected $_customerSession;
     protected $_urlInterface;
+    protected $_address;
     public function __construct(Template\Context $context,
                                 \Magento\Customer\Model\CustomerFactory $customerFactory,
                                 \Magento\Customer\Model\Session $customerSession,
                                 \Magento\Framework\UrlInterface $urlInterface,
+                                \Magento\Customer\Model\Address $address,
                                 array $data = [])
     {
         $this->_urlInterface = $urlInterface;
         $this->_customerSession = $customerSession;
         $this->_customerFactory = $customerFactory;
+        $this->_address = $address;
         parent::__construct ($context, $data);
     }
     public function getCustomerCollection($id) {
@@ -27,6 +30,9 @@ class Customer extends Template
     public function getSessionID() {
         if ($this->_customerSession->isLoggedIn ())
         return $this->_customerSession->getCustomer ()->getId ();
+    }
+    public function getAddressData($id){
+        return $this->_address->load($id)->getCollection ();
     }
     public function getBaseUrlImg()
     {
