@@ -23,8 +23,7 @@
     <!-- dataProvider, with a class tag to define the name of the object to be used. -->
     <dataSource name="movie_movie_data_source">
         <argument name="dataProvider" xsi:type="configurableObject">
-
-            <argument name="class" xsi:type="string">Magenest\Movie\Model\Movie\DataProvider</argument>
+            <argument name="class" xsi:type="string">Magenest\Movie\Ui\DataProvider\Movie\Listing\DataProvider</argument>
             <argument name="name" xsi:type="string">movie_test_listing_data_source</argument>
             <argument name="primaryFieldName" xsi:type="string">movie_id</argument>
             <argument name="requestFieldName" xsi:type="string">id</argument>
@@ -121,7 +120,7 @@
             </argument>
         </column>
 
-        <column name="rating">
+        <column name="rating" class="Magenest\Movie\Ui\Component\Listing\Column\Rating">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="visible" xsi:type="boolean">true</item>
@@ -134,6 +133,7 @@
                     <item name="validation" xsi:type="array">
                         <item name="required-entry" xsi:type="boolean">false</item>
                     </item>
+                    <item name="bodyTmpl" xsi:type="string">ui/grid/cells/html</item>
                 </item>
             </argument>
         </column>

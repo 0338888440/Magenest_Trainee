@@ -1,0 +1,35 @@
+<div class="col-m-5">
+    <table class="admin__table-primary">
+        <tr>
+            <th><?php echo __('Module in Magento') ?></th>
+            <td><?php echo $block->getNumModule(); ?></td>
+        </tr> <tr>
+            <th><?php echo __('Module install') ?></th>
+            <td><?php echo $block->getNumModuleMagenest(); ?></td>
+        </tr>
+    </table>
+</div>
+<div class="col-m-1"></div>
+<div class="col-m-5">
+    <table class="admin__table-secondary">
+        <tr>
+            <th><?php echo __('Customers') ?></th>
+            <td><?php echo $block->getNumCus(); ?></td>
+        </tr> <tr>
+            <th><?php echo __('Products') ?></th>
+            <td><?php echo $block->getNumPro(); ?></td>
+        </tr>
+        <tr>
+            <th><?php echo __('Orders') ?></th>
+            <td><?php echo $block->getNumOrd(); ?></td>
+        </tr>
+        <tr>
+            <th><?php echo __('Invoices') ?></th>
+            <td><?php echo $block->getNumInv(); ?></td>
+        </tr>
+        <tr>
+            <th><?php echo __('Creditmemos') ?></th>
+            <td><?php echo $block->getNumCrm(); ?></td>
+        </tr>
+    </table>
+</div>

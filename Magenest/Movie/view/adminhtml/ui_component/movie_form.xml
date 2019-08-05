@@ -25,7 +25,7 @@
 
     <dataSource name="movie_form_data_source">
         <argument name="dataProvider" xsi:type="configurableObject">
-            <argument name="class" xsi:type="string">Magenest\Movie\Model\Movie\DataProvider</argument>
+            <argument name="class" xsi:type="string">Magenest\Movie\Ui\DataProvider\Movie\Form\DataProvider</argument>
             <argument name="name" xsi:type="string">movie_form_data_source</argument>
             <argument name="primaryFieldName" xsi:type="string">movie_id</argument>
             <argument name="requestFieldName" xsi:type="string">id</argument>
@@ -71,6 +71,12 @@
                     <item name="source" xsi:type="string">movie</item>
                 </item>
             </argument>
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+                <dataType>text</dataType>
+            </settings>
         </field>
 
         <field name="description">
@@ -93,8 +99,15 @@
                     <item name="dataType" xsi:type="string">text</item>
                     <item name="formElement" xsi:type="string">input</item>
                     <item name="source" xsi:type="string">movie</item>
+                    <item name="notice" xsi:type="string" translate="true">Rating from 0 to 10!</item>
                 </item>
             </argument>
+            <settings>
+                <dataType>int</dataType>
+                <validation>
+                    <rule name="validate-number-range" xsi:type="string">0-10</rule>
+                </validation>
+            </settings>
         </field>
 
         <field name="director_id" formElement="select">

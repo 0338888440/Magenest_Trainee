@@ -15,11 +15,11 @@
             <td><?php echo $item->getData ('description') ?></td>
             <td><?php echo $item->getData ('rating') ?></td>
             <td>
-                <?php echo $item->getData ('director_name') ?>
-                <!--                --><?php //foreach ($block->getDirector() as $dir):?>
-                <!--                    --><?php //if ($item->getData('director_id') == $dir->getData ('director_id')){?>
-                <!--                        --><?php //echo $dir->getData ('name'); }?>
-                <!--                --><?php //endforeach; ?>
+                <?php foreach ($block->getDirector () as $dir): ?>
+                    <?php if ($item->getData ('director_id') == $dir->getData ('director_id')) { ?>
+                        <?php echo $dir->getData ('name');
+                    } ?>
+                <?php endforeach; ?>
             </td>
             <td>
                 <?php foreach ($block->getMovieActor () as $movieActor): ?>
