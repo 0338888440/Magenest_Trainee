@@ -3,9 +3,14 @@
         <tr>
             <th><?php echo __('Module in Magento') ?></th>
             <td><?php echo $block->getNumModule(); ?></td>
-        </tr> <tr>
-            <th><?php echo __('Module install') ?></th>
+        </tr>
+        <tr>
+            <th><?php echo __('Module Magenest') ?></th>
             <td><?php echo $block->getNumModuleMagenest(); ?></td>
+        </tr>
+        <tr>
+            <th><?php echo __('Module belonged to another Vendor (not Magento)') ?></th>
+            <td><?php echo $block->getNumModuleNotMagento(); ?></td>
         </tr>
     </table>
 </div>

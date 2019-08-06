@@ -46,6 +46,15 @@ class Report extends \Magento\Backend\Block\Template
         $sql = "Select count(module) FROM ".$tableName." WHERE module like '%Magenest%'";
         return  $connection->fetchOne($sql);
     }
+    public function getNumModuleNotMagento(){
+        $objectManager = \Magento\Framework\App\ObjectManager::getInstance(); // Instance of object manager
+        $resource = $objectManager->get('Magento\Framework\App\ResourceConnection');
+        $connection = $resource->getConnection();
+        $tableName = $resource->getTableName('setup_module'); //gives table name with prefix
+        //Select Data from table
+        $sql = "Select count(module) FROM ".$tableName." WHERE module not like '%Magento%'";
+        return  $connection->fetchOne($sql);
+    }
     public function getNumCus()
     {
         return $this->_customersCollection->create ()->getSize ();
