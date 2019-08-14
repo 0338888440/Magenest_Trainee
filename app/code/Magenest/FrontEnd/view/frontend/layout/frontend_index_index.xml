@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="3columns"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <title>Modal Test Page</title>
+        <script src="Magenest_FrontEnd::js/hello.js"/>
+        <script src="Magenest_FrontEnd::js/loginmodal.js"/>
+    </head>
+    
+    <body>
+        <referenceContainer name="content">
+            <block class="Magenest\FrontEnd\Block\Main"
+                   name="test" template="Magenest_FrontEnd::test.phtml"/>
+        </referenceContainer>
+    </body>
+</page>

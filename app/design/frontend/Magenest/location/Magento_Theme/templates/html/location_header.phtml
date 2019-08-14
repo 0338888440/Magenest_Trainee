@@ -1,0 +1,99 @@
+<style>
+    .modal-footer {
+        display: none;
+    }
+    .location_popup {
+        width: 450px;
+        height: auto;
+    }
+    .modal-inner-wrap {
+        width: 500px !important;
+    }
+    #save_location {
+        margin: 15px auto;
+        display: flex;
+    }
+</style>
+<?php $city = $block->getCity ()['LtsItem'] ?>
+<a id="location_select_link"><?php echo $block->getCusLocation ($block->getCusLogIn ()); ?></a>
+
+<div class="location_popup">
+    <form method="post" id="select_location" action="">
+        <label><?php echo __ ('City') ?> </label>
+        <select id="city" class="city">
+            <option>--Select Your City--</option>
+            <?php foreach ($city as $value) : ?>
+                <option value="<?= $value['ID'] ?>"><?= $value['Title'] ?></option>
+            <?php endforeach; ?>
+        </select>
+
+        <label><?php echo __ ('Region') ?> </label>
+        <select id="region" class="region">
+            <option>--Select Your Region--</option>
+        </select>
+
+        <label><?php echo __ ('Street') ?> </label>
+        <select id="street" class="street">
+            <option>--Select Your Street--</option>
+        </select>
+    </form>
+    <button id="save_location">Save</button>
+</div>
+
+<script type="text/javascript">
+    require([
+        'jquery'
+    ], function ($) {
+        "use strict";
+        $(document).ready(function () {
+            var html = '<option value="">--- Choose your Location ---</option>';
+            $('#city').on('change', function () {
+                var id = $(this).val();
+                $.ajax({
+                    url: "http://localhost/m-228/frontend/index/getRegion/region/" + id,
+                    method: 'get'
+                }).done(function (result) {
+                    $('#region').empty();
+                    var arr = JSON.parse(result);
+                    $.each(arr, function (key, item) {
+                        html = '<option value="' + item.ID + '">' + item.Title + '</option>';
+                        $('#region').append(html);
+                    });
+                });
+            });
+            $('#region').on('change', function () {
+                var street_id = $(this).val();
+                $.ajax({
+                    url: "http://localhost/m-228/frontend/index/getStreet/street/" + street_id,
+                    method: 'get'
+                }).done(function (result) {
+                    $('#street').empty();
+                    var arr = JSON.parse(result);
+                    $.each(arr, function (key, item) {
+                        html = '<option value="' + item.ID + '">' + item.Title + '</option>';
+                        $('#street').append(html);
+                    });
+                })
+            });
+            $('#save_location').on('click', function () {
+                var city = $('#city option:selected').text();
+                var region = $('#region option:selected').text();
+                var street = $('#street option:selected').text();
+                $.ajax({
+                    method: "post",
+                    url: "http://localhost/m-228/frontend/index/savelocation",
+                    data: {city: city, region: region, street: street},
+                    success: function (data) {
+                        // Simulate a mouse click:
+                        location.reload();
+                        console.log("ys");
+                    },
+                    error: function () {
+                        console.log("no");
+                    }
+                });
+            });
+        });
+    })
+
+</script>

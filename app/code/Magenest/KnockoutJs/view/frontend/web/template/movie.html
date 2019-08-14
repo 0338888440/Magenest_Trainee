@@ -1,0 +1,21 @@
+<button data-bind=" click: getMovie">Get Next Movie</button>
+<table width="100%" border="1">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Rating</th>
+        <th>Director</th>
+    </tr>
+    </thead>
+    <tbody data-bind="foreach: movieList">
+    <tr>
+        <td data-bind="text: movie_id"></td>
+        <td data-bind="text: name"></td>
+        <td data-bind="text: description "></td>
+        <td data-bind="text: rating"></td>
+        <td data-bind="text: director_name"></td>
+    </tr>
+    </tbody>
+</table>

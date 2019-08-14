@@ -1,0 +1,13 @@
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <script src="Magento_Theme::js/location_select.js"/>
+    </head>
+    <body>
+        <referenceContainer name="header.panel" >
+            <container name="header.left.container" >
+                <block class="Magenest\FrontEnd\Block\Location" name="location_header" template="Magento_Theme::html/location_header.phtml" cacheable="false"/>
+            </container>
+        </referenceContainer>
+    </body>
+</page>

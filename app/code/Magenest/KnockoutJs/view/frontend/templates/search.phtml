@@ -1,0 +1,16 @@
+<input name="firstname" type="text" id="first-name-text" placeholder="First name" required/>
+<input name="lasname" type="text" id="last-name-text" placeholder="Last name" required/>
+<button type="submit" value="save" class="save" id="save">Save</button>
+
+<div id="movie-div" data-bind="scope:'search'">
+     <!-- ko template: getTemplate() --><!-- /ko -->
+    <script type="text/x-magento-init">
+       {
+           "#movie-div": {
+               "Magento_Ui/js/core/app":
+                    <?php /* @escapeNotVerified */ echo $block->getJsLayout (); ?>
+           }
+       }
+
+    </script>
+</div>
