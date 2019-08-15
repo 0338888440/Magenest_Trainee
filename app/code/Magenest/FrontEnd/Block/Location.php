@@ -12,15 +12,19 @@ class Location extends Template
     protected $customerLocation;
     protected $_customerFactory;
     protected $cookieManager;
+    protected $_curl;
+
     public function __construct(Template\Context $context,
                                 \Magento\Customer\Model\CustomerFactory $customerFactory,
                                 \Magento\Customer\Model\ResourceModel\Address\CollectionFactory $address,
                                 CookieManagerInterface $cookieManager,
+                                \Magento\Framework\HTTP\Client\Curl $curl,
                                 array $data = [])
     {
         $this->cookieManager = $cookieManager;
         $this->customerLocation = $address;
         $this->_customerFactory = $customerFactory;
+        $this->_curl = $curl;
         parent::__construct ($context, $data);
     }
 
@@ -53,8 +57,10 @@ class Location extends Template
     public function getJsonCity()
     {
         $url = "https://thongtindoanhnghiep.co/api/city";
-        $response = file_get_contents ($url);
-        $json = json_decode ($response, true);
+        $this->_curl->get($url);
+        $content = $this->_curl->getBody();
+//        $content = file_get_contents ($url);
+        $json = json_decode ($content, true);
         return $json;
     }
 }
