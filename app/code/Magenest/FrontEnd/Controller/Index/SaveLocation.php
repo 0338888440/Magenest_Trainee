@@ -36,7 +36,7 @@ class SaveLocation extends \Magento\Framework\App\Action\Action
         $city = $this->getRequest ()->getParam ('city');
         $region = $this->getRequest ()->getParam ('region');
         $street = $this->getRequest ()->getParam ('street');
-        $str = $street . " " . $region . " " . $city;
+        $str = $street . ", " . $region . ", " . $city;
         $id = $this->getSessionID ();
         if ($id != null) {
             $colCusAdd = $this->_customerLocation->create ()->addAttributeToFilter ('parent_id', $id);
@@ -47,7 +47,7 @@ class SaveLocation extends \Magento\Framework\App\Action\Action
         } else {
             $metadata = $this->_cookieMetadataFactory
                 ->createPublicCookieMetadata()
-                ->setDuration(3600)
+                ->setDuration(600)  /*10 min*/
                 ->setPath($this->_sessionManager->getCookiePath())
                 ->setDomain($this->_sessionManager->getCookieDomain());
 
