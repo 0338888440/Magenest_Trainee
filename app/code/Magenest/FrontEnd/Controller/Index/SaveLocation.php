@@ -2,6 +2,7 @@
 
 namespace Magenest\FrontEnd\Controller\Index;
 
+use Magento\Framework\Controller\Result\Raw;
 use Magento\Framework\Session\SessionManagerInterface;
 use Magento\Framework\Stdlib\Cookie\CookieMetadataFactory;
 use Magento\Framework\Stdlib\CookieManagerInterface;
@@ -38,25 +39,33 @@ class SaveLocation extends \Magento\Framework\App\Action\Action
         $street = $this->getRequest ()->getParam ('street');
         $str = $street . ", " . $region . ", " . $city;
         $id = $this->getSessionID ();
-        if ($id != null) {
-            $colCusAdd = $this->_customerLocation->create ()->addAttributeToFilter ('parent_id', $id);
-            $colCusAdd->setDataToAll ('city', $city);
-            $colCusAdd->setDataToAll ('region', $region);
-            $colCusAdd->setDataToAll ('street', $street);
-            $colCusAdd->save ();
+        if ($city == "--Select Your City--" || $region == "--Select Your Region--" || $street == "--Select Your Street--") {
+            /** @var Raw $raw */
+            $raw = $this->resultFactory->create ('raw');
+            $raw->setHttpResponseCode (404);
+            return $raw;
         } else {
-            $metadata = $this->_cookieMetadataFactory
-                ->createPublicCookieMetadata()
-                ->setDuration(600)  /*10 min*/
-                ->setPath($this->_sessionManager->getCookiePath())
-                ->setDomain($this->_sessionManager->getCookieDomain());
+            if ($id != null) {
+                $colCusAdd = $this->_customerLocation->create ()->addAttributeToFilter ('parent_id', $id);
+                $colCusAdd->setDataToAll ('city', $city);
+                $colCusAdd->setDataToAll ('region', $region);
+                $colCusAdd->setDataToAll ('street', $street);
+                $colCusAdd->save ();
+            } else {
+                $metadata = $this->_cookieMetadataFactory
+                    ->createPublicCookieMetadata ()
+                    ->setDuration (600)/*10 min*/
+                    ->setPath ($this->_sessionManager->getCookiePath ())
+                    ->setDomain ($this->_sessionManager->getCookieDomain ());
 
-            $this->_cookieManager->setPublicCookie(
-                'location',
-                $str,
-                $metadata
-            );
+                $this->_cookieManager->setPublicCookie (
+                    'location',
+                    $str,
+                    $metadata
+                );
+            }
         }
+
     }
 
     public function getSessionID()

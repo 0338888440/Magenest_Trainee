@@ -66,8 +66,9 @@
 
 <script type="text/javascript">
     require([
-        'jquery'
-    ], function ($) {
+        'jquery',
+        'Magento_Ui/js/modal/alert'
+    ], function ($, alert) {
         "use strict";
         $(document).ready(function () {
             var html = '<option value="">--- Choose your Location ---</option>';
@@ -108,12 +109,17 @@
                     url: "http://localhost/m-228/frontend/index/savelocation",
                     data: {city: city, region: region, street: street},
                     success: function (data) {
-                        // Simulate a mouse click:
                         location.reload();
-                        console.log("ys");
                     },
                     error: function () {
-                        console.log("no");
+                        alert({
+                            title: "Error",
+                            content: "Please choose your location!!!",
+                            action: {
+                                always: function () {
+                                }
+                            }
+                        });
                     }
                 });
             });
