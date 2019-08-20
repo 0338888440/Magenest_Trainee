@@ -38,26 +38,31 @@
 
 </style>
 <?php $city = $block->getJsonCity ()['LtsItem'] ?>
+<?php $dataLocationId = json_decode ($block->getDataLocationCookie ()); ?>
 <a id="location_select_link"><?php echo $block->getCusLocation ($block->getCusLogIn ()); ?></a>
+<input id="isLogIn" type="text" hidden value="<?= $block->getCusLogIn () ?>">
+<input id="city_id" type="text" hidden value="<?= $block->getCityId ($block->getCusLogIn ()) ?>">
+<input id="region_id" type="text" hidden value="<?= $block->getRegionId ($block->getCusLogIn ()) ?>">
+<input id="street_id" type="text" hidden value="<?= $block->getStreetId ($block->getCusLogIn ()) ?>">
 
 <div class="location_popup">
     <form method="post" id="select_location" action="">
         <label><?php echo __ ('City') ?> </label>
         <select id="city" class="city">
-            <option>--Select Your City--</option>
+            <option value="">-- Choose your city --</option>
             <?php foreach ($city as $value) : ?>
-                <option value="<?= $value['ID'] ?>"><?= $value['Title'] ?></option>
+                <option value="<?= $value['ID'] ?>" <?php if (!empty($dataLocationId) && $dataLocationId->city_id == $value['ID']) echo 'selected' ?>><?= $value['Title'] ?></option>
             <?php endforeach; ?>
         </select>
 
         <label><?php echo __ ('Region') ?> </label>
         <select id="region" class="region">
-            <option>--Select Your Region--</option>
+            <option value="">-- Choose your region --</option>
         </select>
 
         <label><?php echo __ ('Street') ?> </label>
         <select id="street" class="street">
-            <option>--Select Your Street--</option>
+            <option value="">-- Choose your street --</option>
         </select>
     </form>
     <button id="save_location">Save</button>
@@ -67,15 +72,60 @@
 <script type="text/javascript">
     require([
         'jquery',
-        'Magento_Ui/js/modal/alert'
+        'Magento_Ui/js/modal/alert',
+        'jquery/jquery.cookie'
     ], function ($, alert) {
         "use strict";
         $(document).ready(function () {
-            var html = '<option value="">--- Choose your Location ---</option>';
+            var html = '';
+            var dataLocationId = {};
+            if ($('#isLogIn').val() !== "") {
+                dataLocationId = {
+                    city_id: $('#city_id').val(),
+                    region_id: $('#region_id').val(),
+                    street_id: $('#street_id').val()
+                };
+            } else {
+                dataLocationId = JSON.parse($.cookie('location_data'));
+            }
+            if (dataLocationId && dataLocationId.city_id) {
+                $.ajax({
+                    url: BASE_URL + "/frontend/index/getRegion/region/" + dataLocationId.city_id,
+                    method: 'get'
+                }).done(function (result) {
+                    $('#region').empty();
+                    var arr = JSON.parse(result);
+                    $.each(arr, function (key, item) {
+                        if (dataLocationId.region_id && dataLocationId.region_id == item.ID) {
+                            var selected = 'selected';
+                        } else selected = '';
+                        html = '<option value="' + item.ID + '"' + selected + '>' + item.Title + '</option>';
+                        $('#region').append(html);
+                    });
+                });
+            }
+
+            if (dataLocationId && dataLocationId.region_id) {
+                $.ajax({
+                    url: BASE_URL + "/frontend/index/getStreet/street/" + dataLocationId.region_id,
+                    method: 'get'
+                }).done(function (result) {
+                    $('#street').empty();
+                    var arr = JSON.parse(result);
+                    $.each(arr, function (key, item) {
+                        if (dataLocationId.street_id && dataLocationId.street_id == item.ID) {
+                            var selected = 'selected';
+                        } else selected = '';
+                        html = '<option value="' + item.ID + '"' + selected + '>' + item.Title + '</option>';
+                        $('#street').append(html);
+                    });
+                });
+            }
+
             $('#city').on('change', function () {
                 var id = $(this).val();
                 $.ajax({
-                    url: "http://localhost/m-228/frontend/index/getRegion/region/" + id,
+                    url: BASE_URL + "/frontend/index/getRegion/region/" + id,
                     method: 'get'
                 }).done(function (result) {
                     $('#region').empty();
@@ -83,13 +133,29 @@
                     $.each(arr, function (key, item) {
                         html = '<option value="' + item.ID + '">' + item.Title + '</option>';
                         $('#region').append(html);
+                        // $('#street').empty();
+                        // $('#street').append('<option value="">-- Choose your street --</option>');
                     });
+                }).complete(function (result) {
+                    if (result) {
+                        $.ajax({
+                            url: BASE_URL + "/frontend/index/getStreet/street/" + $('#region option:selected').val(),
+                            method: 'get'
+                        }).done(function (result) {
+                            $('#street').empty();
+                            var arr = JSON.parse(result);
+                            $.each(arr, function (key, item) {
+                                html = '<option value="' + item.ID + '">' + item.Title + '</option>';
+                                $('#street').append(html);
+                            });
+                        })
+                    }
                 });
             });
             $('#region').on('change', function () {
                 var street_id = $(this).val();
                 $.ajax({
-                    url: "http://localhost/m-228/frontend/index/getStreet/street/" + street_id,
+                    url: BASE_URL + "/frontend/index/getStreet/street/" + street_id,
                     method: 'get'
                 }).done(function (result) {
                     $('#street').empty();
@@ -104,10 +170,20 @@
                 var city = $('#city option:selected').text();
                 var region = $('#region option:selected').text();
                 var street = $('#street option:selected').text();
+                var city_id = $('#city option:selected').val();
+                var region_id = $('#region option:selected').val();
+                var street_id = $('#street option:selected').val();
                 $.ajax({
                     method: "post",
-                    url: "http://localhost/m-228/frontend/index/savelocation",
-                    data: {city: city, region: region, street: street},
+                    url: BASE_URL + "/frontend/index/savelocation",
+                    data: {
+                        city: city,
+                        region: region,
+                        street: street,
+                        city_id: city_id,
+                        region_id: region_id,
+                        street_id: street_id
+                    },
                     success: function (data) {
                         location.reload();
                     },
