@@ -9,6 +9,7 @@ return [
         'Magento_Customer' => 1,
         'Magento_AdminNotification' => 1,
         'Magenest_FrontEnd' => 1,
+        'Magenest_ImportReview' => 1,
         'Magenest_KnockoutJs' => 1,
         'Magento_Backend' => 1,
         'Magento_Indexer' => 1,

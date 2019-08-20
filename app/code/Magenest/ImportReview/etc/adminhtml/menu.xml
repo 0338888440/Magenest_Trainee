@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Magenest_ImportReview::import_review"
+             title="Reviews Import"
+             module="Magenest_ImportReview"
+             sortOrder="2"
+             resource="Magenest_ImportReview::import_review" />
+            <add id="Magenest_ImportReview::index"
+                 title="Import"
+                 module="Magenest_ImportReview"
+                 sortOrder="0"
+                 action="import_review/import"
+                 parent="Magenest_ImportReview::import_review"
+                 resource="Magenest_ImportReview::index" />
+    </menu>
+</config>
