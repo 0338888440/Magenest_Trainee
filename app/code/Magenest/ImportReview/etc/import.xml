@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_ImportExport:etc/import.xsd">
+    <!--Magento\AdvancedPricingImportExport\Model\Import\AdvancedPricing-->
+    <entity name="import_review" label="Import Review" model="Magenest\ImportReview\Model\Import\Review"
+            behaviorModel="Magenest\ImportReview\Model\Source\Import\Behavior\Basic"/>
+</config>
