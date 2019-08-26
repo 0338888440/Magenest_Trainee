@@ -1,0 +1,93 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+/** @var $block \Magento\Catalog\Block\Product\View */
+?>
+<?php $_price = $block->getPriceProductById (); ?>
+<?php $_product = $block->getProduct (); ?>
+<?php $buttonTitle = __ ('Add to Cart'); ?>
+<?php if ($_product->isSaleable ()): ?>
+    <div class="box-tocart">
+        <div class="fieldset">
+            <?php if ($block->shouldRenderQuantity ()): ?>
+                <div class="field qty">
+                    <label class="label" for="qty"><span><?= /* @escapeNotVerified */
+                            __ ('Qty') ?></span></label>
+                    <div class="control">
+                        <input type="number"
+                               name="qty"
+                               id="qty"
+                               min="0"
+                               value="<?= /* @escapeNotVerified */
+                               $block->getProductDefaultQty () * 1 ?>"
+                               title="<?= /* @escapeNotVerified */
+                               __ ('Qty') ?>"
+                               class="input-text qty"
+                               data-validate="<?= $block->escapeHtml (json_encode ($block->getQuantityValidators ())) ?>"
+                        />
+                    </div>
+                </div>
+                <div>
+                    <input id="id_product" value="<?= $block->getIdProduct () ?>" hidden>
+                    <input id="price_product" value="<?= $_price ?>" hidden>
+                </div>
+            <?php endif; ?>
+            <div class="actions">
+                <button type="submit"
+                        title="<?= /* @escapeNotVerified */
+                        $buttonTitle ?>"
+                        class="action primary tocart"
+                        id="product-addtocart-button">
+                    <span><?= /* @escapeNotVerified */
+                        $buttonTitle ?></span>
+                </button>
+                <?= $block->getChildHtml ('', true) ?>
+            </div>
+        </div>
+    </div>
+<?php endif; ?>
+<script type="text/x-magento-init">
+    {
+        "#product_addtocart_form": {
+            "Magento_Catalog/js/validate-product": {}
+        }
+    }
+
+
+
+</script>
+
+<script>
+    require([
+            "jquery"
+        ], function ($) {
+            "use strict";
+            $(document).ready(function () {
+                $('#qty').keyup(function () {
+                    $('.price').html('$' + $('#qty').val() * $('#price_product').val());
+                });
+                $('#product-addtocart-button').click(function () {
+                    var accountName = $('#input_account_name').val();
+                    var qty = $('#qty').val();
+                    var idProduct = $('#id_product').val();
+                    $.ajax({
+                        type: "POST",
+                        url: BASE_URL + "cybergame/product/addaccountnameinsession",
+                        data: {account_name: accountName, qty: qty, product_id: idProduct},
+                        success: function () {
+                            console.log('ys');
+                        },
+                        error: function () {
+                            console.log('no');
+                        }
+                    });
+                })
+            });
+        }
+    );
+</script>

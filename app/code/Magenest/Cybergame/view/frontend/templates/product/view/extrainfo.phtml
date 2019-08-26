@@ -1,0 +1,45 @@
+<?php $item = $block->getRoomOptionCollection (); ?>
+<p><span>Nunber PC: <?= $item->getData ('number_pc') ?></span></p>
+<p><span>Address: <?= $item->getData ('address') ?></span></p>
+<p><span>Food Price: <?= $item->getData ('food_price') ?></span></p>
+<p><span>Drink Price: <?= $item->getData ('drink_price') ?></span></p>
+<form>
+    <p><label>Account Name:</label></p>
+    <input id="input_account_name"/>
+    <p id="p_message"></p>
+</form>
+
+<script>
+    require([
+        'jquery'
+    ], function ($) {
+        "use strict";
+        $(document).ready(function () {
+            var html = '';
+            $('#input_account_name').keyup(function () {
+                var accountName = $(this).val();
+                var idProduct = $('#id_product').val();
+                $('#p_message').empty();
+                if (accountName != '') {
+                    $.ajax({
+                        type: "POST",
+                        url: BASE_URL + "cybergame/product/checkAccount",
+                        data: {account_name: accountName, product_id: idProduct},
+                        success: function () {
+                            html = '<strong style="color: red">Account was exist in our system. You are buying hour for this.</strong>';
+                            $('#p_message').empty();
+                            $('#p_message').append(html);
+                        },
+                        error: function () {
+                            html = '<strong style="color: green">We will create new account for you. Default password = 1. You should change the password after login</strong>';
+                            $('#p_message').empty();
+                            $('#p_message').append(html);
+                        }
+                    });
+                } else {
+                    $('#p_message').empty();
+                }
+            })
+        });
+    });
+</script>

@@ -1,0 +1,26 @@
+<?php $item = $block->getRoomOptionCollection(); ?>
+<form action="<?= $block->getSaveUrl() ?>" method="post" id="form_edit_extra_option" >
+
+    <input type="text" name="id" id="id" width="100%" value="<?= $item->getData ('id'); ?>" hidden>
+
+    <label>Room Name</label>
+    <input type="text" name="product_id" id="product_id" width="100%" value="<?= $item->getData ('product_id'); ?>"  hidden>
+    <input type="text" name="product_name" id="product_name" width="100%" value="<?= $block->getNameProductById() ?>" disabled>
+
+    <label>Price</label>
+    <input type="text" name="price" id="price" width="100%" value="<?= $block->getPriceProductById() ?>" disabled>
+
+    <label>Number PC</label>
+    <input type="text" name="number_pc" id="number_pc" width="100%" value="<?= $item->getData ('number_pc'); ?>">
+
+    <label>Address</label>
+    <input type="text" name="address" id="address" width="100%" value="<?= $item->getData ('address'); ?>">
+
+    <label>Food Price</label>
+    <input type="text" name="food_price" id="food_price" width="100%" value="<?= $item->getData ('food_price'); ?>">
+
+    <label>Drink Price</label>
+    <input type="text" name="drink_price" id="drink_price" width="100%" value="<?= $item->getData ('drink_price'); ?>">
+</form>
+
+<button type="submit" form="form_edit_extra_option" value="Submit" class="save_extra_option" id="save_extra_option">Save</button>

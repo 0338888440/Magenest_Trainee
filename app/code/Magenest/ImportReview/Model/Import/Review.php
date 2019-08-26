@@ -65,8 +65,33 @@ class Review extends \Magento\ImportExport\Model\Import\Entity\AbstractEntity
      */
     protected $request;
 
-    protected $validColumnNames = ['product_id','sku','email','nickname','title','detail','create_at','status'];
+    /**
+     * @var array
+     */
+    protected $validColumnNames = ['product_id', 'sku', 'email', 'nickname', 'title', 'detail', 'create_at', 'status'];
 
+    /**
+     * Review constructor.
+     * @param \Magento\Framework\Json\Helper\Data $jsonHelper
+     * @param \Magento\ImportExport\Helper\Data $importExportData
+     * @param \Magento\ImportExport\Model\ResourceModel\Import\Data $importData
+     * @param \Magento\Framework\App\ResourceConnection $resource
+     * @param \Magento\ImportExport\Model\ResourceModel\Helper $resourceHelper
+     * @param ProcessingErrorAggregatorInterface $errorAggregator
+     * @param \Magento\Framework\Stdlib\DateTime\DateTime $dateTime
+     * @param \Magento\Framework\View\Result\PageFactory $resultPageFactory
+     * @param \Magento\MediaStorage\Model\File\UploaderFactory $uploaderFactory
+     * @param \Magento\Framework\Filesystem $filesystem
+     * @param \Magento\Framework\File\Csv $csvProcessor
+     * @param \Magento\Store\Model\StoreManager $storeManager
+     * @param \Magento\Review\Model\ReviewFactory $reviewFactory
+     * @param \Magento\Review\Model\ResourceModel\Review\CollectionFactory $reviewCollectionFactory
+     * @param \Magento\Review\Model\RatingFactory $ratingFactory
+     * @param \Magento\Customer\Model\CustomerFactory $customerFactory
+     * @param \Magento\Framework\App\Request\Http $request
+     * @throws \Magento\Framework\Exception\FileSystemException
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     */
     public function __construct(
         \Magento\Framework\Json\Helper\Data $jsonHelper,
         \Magento\ImportExport\Helper\Data $importExportData,
@@ -109,6 +134,10 @@ class Review extends \Magento\ImportExport\Model\Import\Entity\AbstractEntity
     }
 
 //
+
+    /**
+     * @return array
+     */
     public function getValidColumnNames()
     {
         return $this->validColumnNames;
@@ -121,7 +150,45 @@ class Review extends \Magento\ImportExport\Model\Import\Entity\AbstractEntity
      */
     public function validateRow(array $rowData, $rowNum)
     {
-        return true;
+        $productId = $rowData['product_id'];
+        if (empty($productId)) {
+            $productId = $this->objectManager->get ('Magento\Catalog\Model\Product')->getIdBySku ($rowData['sku']);
+            $rowData['product_id'] = $productId;
+            if (empty($productId)) {
+                $this->addRowError ("Didn't have product by product_id or sku!", $rowNum);
+            }
+        } else {
+            $prodColl = $this->objectManager->create ('Magento\Catalog\Model\Product')->load ($productId);
+            if (empty($prodColl)) {
+                $productId = $this->objectManager->get ('Magento\Catalog\Model\Product')->getIdBySku ($rowData['sku']);
+                $rowData['product_id'] = $productId;
+                if (empty($productId)) {
+                    $this->addRowError ("Didn't have product by product_id or sku! ", $rowNum);
+                }
+            }
+        }
+        if ($rowData['status'] != 1 && $rowData['status'] != 2 && $rowData['status'] != 3) {
+            $this->addRowError ("Status must be equal 1-(Approved), 2-(Pending) or 3-(Not Approved)!", $rowNum);
+        }
+        if (empty($rowData['email'])) {
+            $this->addRowError ("Please import email! ", $rowNum);
+        } else {
+            if (!$this->emailValid ($rowData['email'])) {
+                $this->addRowError ("Please import right form of email! ", $rowNum);
+            }
+        }
+        if (empty($rowData['nickname'])) {
+            $this->addRowError ("Please import nickname! ", $rowNum);
+        }
+        if (empty($rowData['title'])) {
+            $this->addRowError ("Please import title! ", $rowNum);
+        }
+        if (empty($rowData['detail'])) {
+            $this->addRowError ("Please import detail! ", $rowNum);
+        }
+        if (empty($rowData['create_at'])) {
+            $this->addRowError ("Please import time create_at! ", $rowNum);
+        }
     }
 
     /**
@@ -172,10 +239,14 @@ class Review extends \Magento\ImportExport\Model\Import\Entity\AbstractEntity
             $row = $data;
             $productId = $row['product_id'];
             if (empty($productId)) {
-                //If product id is used as sku
                 $productId = $this->objectManager->get ('Magento\Catalog\Model\Product')->getIdBySku ($row['sku']);
                 $row['product_id'] = $productId;
                 if (empty($productId)) {
+                    continue;
+                }
+            } else {
+                $prodColl = $this->objectManager->create ('Magento\Catalog\Model\Product')->load ($productId);
+                if (!empty($prodColl)) {
                     continue;
                 }
             }
@@ -193,6 +264,9 @@ class Review extends \Magento\ImportExport\Model\Import\Entity\AbstractEntity
                     $review->setCustomerId ($this->getUserId ($row['email']));
                 }
             } else {
+                continue;
+            }
+            if ($row['status'] != 1 && $row['status'] != 2 && $row['status'] != 3) {
                 continue;
             }
             if (empty($row['email']) || empty($row['nickname']) || empty($row['title']) || empty($row['detail']) || empty($row['create_at'])) {

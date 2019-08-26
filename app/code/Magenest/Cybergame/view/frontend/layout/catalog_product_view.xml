@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<page layout="1column" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="content">
+            <referenceContainer name="product.info.main">
+                <block name="extra_info_block" class="Magenest\Cybergame\Block\Product\ExtraInfo" after="product.info.price" cacheable="false">
+                    <action method="setTemplate">
+                        <argument name="extra_info" xsi:type="string">Magenest_Cybergame::product/view/extrainfo.phtml</argument>
+                    </action>
+                </block>
+            </referenceContainer>
+        </referenceContainer>
+        <referenceContainer name="product.info.form.content">
+            <block class="Magenest\Cybergame\Block\Product\ExtraInfo" name="product.info.addtocart" as="addtocart" template="Magenest_Cybergame::product/view/addtocart.phtml">
+                <!--<arguments>
+                    <argument name="jsLayout" xsi:type="array">
+                        <item name="components" xsi:type="array">
+                            <item name="display" xsi:type="array">
+                                <item name="component" xsi:type="string">Magenest_Cybergame/js/view/confirm_account</item>
+                                <item name="displayArea" xsi:type="string">display</item>
+                            </item>
+                        </item>
+                    </argument>
+                </arguments>-->
+            </block>
+        </referenceContainer>
+    </body>
+</page>

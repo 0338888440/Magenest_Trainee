@@ -40,12 +40,14 @@ class Location extends Template
     {
         if ($id != null) {
             $address = $this->customerLocation->create ()->addAttributeToFilter ('parent_id', $id)->getFirstItem ();
-            if (!empty($address)) {
-                $city = $address->getData ('city');
-                $region = $address->getData ('region');
-                $street = $address->getData ('street');
+            $city = $address->getData ('city');
+            $region = $address->getData ('region');
+            $street = $address->getData ('street');
+            if (!empty($city) && !empty($region) && !empty($street)) {
                 $str = $street . ", " . $region . ", " . $city;
                 return $str;
+            } else {
+                return "Choose your location!!!";
             }
         } elseif
         ($this->cookieManager->getCookie ('location') != null) {
@@ -61,9 +63,9 @@ class Location extends Template
 
         $objectManager = \Magento\Framework\App\ObjectManager::getInstance ();
         /** @var \Magento\Catalog\Model\Product $product */
-        $addr = $objectManager->get('Magento\Customer\Model\Address');
-        $addre = $addr->load($entity_id);
-        return $addre->getData('city_id');
+        $addr = $objectManager->get ('Magento\Customer\Model\Address');
+        $addre = $addr->load ($entity_id);
+        return $addre->getData ('city_id');
     }
 
     public function getRegionId($id)
@@ -84,9 +86,9 @@ class Location extends Template
 
         $objectManager = \Magento\Framework\App\ObjectManager::getInstance ();
         /** @var \Magento\Catalog\Model\Product $product */
-        $addr = $objectManager->get('Magento\Customer\Model\Address');
-        $addre = $addr->load($entity_id);
-        return $addre->getData('street_id');
+        $addr = $objectManager->get ('Magento\Customer\Model\Address');
+        $addre = $addr->load ($entity_id);
+        return $addre->getData ('street_id');
     }
 
     public function getDataLocationCookie()

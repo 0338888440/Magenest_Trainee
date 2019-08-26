@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">room_extra_option_form.room_extra_option_form_data_source</item>
+            <item name="deps" xsi:type="string">room_extra_option_form.room_extra_option_form_data_source</item>
+        </item>
+
+        <item name="label" xsi:type="string" translate="true">Room Extra Option Form</item>
+        <item name="config" xsi:type="array">
+            <item name="dataScope" xsi:type="string">data</item>
+            <item name="namespace" xsi:type="string">room_extra_option_form</item>
+        </item>
+
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
+
+        <item name="buttons" xsi:type="array">
+            <item name="back" xsi:type="string">Magenest\Cybergame\Block\Adminhtml\RoomExtraOption\Edit\BackButton</item>
+            <item name="delete" xsi:type="string">Magenest\Cybergame\Block\Adminhtml\RoomExtraOption\Edit\DeleteButton</item>
+            <item name="reset" xsi:type="string">Magenest\Cybergame\Block\Adminhtml\RoomExtraOption\Edit\ResetButton</item>
+            <item name="save" xsi:type="string">Magenest\Cybergame\Block\Adminhtml\RoomExtraOption\Edit\SaveButton</item>
+        </item>
+    </argument>
+
+    <dataSource name="room_extra_option_form_data_source">
+        <argument name="dataProvider" xsi:type="configurableObject">
+            <argument name="class" xsi:type="string">
+                Magenest\Cybergame\Ui\DataProvider\RoomExtraOption\Form\DataProvider
+            </argument>
+            <argument name="name" xsi:type="string">room_extra_option_form_data_source</argument>
+            <argument name="primaryFieldName" xsi:type="string">id</argument>
+            <argument name="requestFieldName" xsi:type="string">id</argument>
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="submit_url" xsi:type="url" path="cybergame/roomextraoption/save"/>
+                </item>
+            </argument>
+        </argument>
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+            </item>
+        </argument>
+    </dataSource>
+
+    <fieldset name="room_extra_option">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="collapsible" xsi:type="boolean">false</item>
+                <item name="label" xsi:type="string" translate="true">Room Extra Option Fieldset</item>
+            </item>
+        </argument>
+
+        <field name="id">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="visible" xsi:type="boolean">false</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">room_extra_option</item>
+                </item>
+            </argument>
+        </field>
+
+        <field name="product_id" formElement="select">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">room_extra_option</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Product</label>
+<!--                <imports>-->
+<!--                    <link name="value">${ $.provider }:data.product.product_id</link>-->
+<!--                </imports>-->
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+            </settings>
+            <formElements>
+                <select>
+                    <settings>
+                        <options class="Magenest\Cybergame\Model\Config\Source\ProductList"/>
+                    </settings>
+                </select>
+            </formElements>
+        </field>
+
+        <field name="number_pc">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string">Number Pc</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">room_extra_option</item>
+                </item>
+            </argument>
+        </field>
+
+        <field name="address">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string">Address</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">room_extra_option</item>
+                </item>
+            </argument>
+        </field>
+        <field name="food_price">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string">Food Price</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">room_extra_option</item>
+                </item>
+            </argument>
+        </field>
+        <field name="drink_price">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string">Drink Price</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">room_extra_option</item>
+                </item>
+            </argument>
+        </field>
+
+    </fieldset>
+</form>

@@ -1,0 +1,31 @@
+<style>
+    .span_number{
+        background-color: red;
+        border-radius: 50%;
+        width: 20px;
+        height: 20px;
+        display: block;
+        text-align: center;
+    }
+</style>
+<table id="room_table" class="admin__table-secondary" style="width:100%" border="1px">
+    <tr>
+        <th>Product_Id</th>
+        <th>Room Name</th>
+        <th>Price</th>
+        <th <?= $block->checkManager () ?>>Action</th>
+    </tr>
+    <?php foreach ($block->getProductCollection () as $item): ?>
+        <tr>
+            <td>
+                <span class="room_id"><?= $item->getId () ?></span>
+            </td>
+            <td><?= $item->getName () ?></td>
+            <td><?= $item->getPrice () ?></td>
+            <td <?= $block->checkManager () ?>>
+                <a href="<?= $block->getEditUrl () . $item->getId () ?>">Edit</a>
+            </td>
+        </tr>
+    <?php endforeach; ?>
+</table>
+
