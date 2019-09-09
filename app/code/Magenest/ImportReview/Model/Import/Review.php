@@ -245,12 +245,11 @@ class Review extends \Magento\ImportExport\Model\Import\Entity\AbstractEntity
                     continue;
                 }
             } else {
-                $prodColl = $this->objectManager->create ('Magento\Catalog\Model\Product')->load ($productId);
+                $prodColl = $this->objectManager->get ('Magento\Catalog\Model\Product')->load ($productId);
                 if (!empty($prodColl)) {
                     continue;
                 }
             }
-            $review = $this->prepareReview ($row);
             /** @var \Magento\Review\Model\ResourceModel\Review\Collection $reviewCollection */
             $reviewCollection = $this->reviewCollectionFactory->create ();
             $reviewCollection->addFilter ('entity_pk_value', $productId)
@@ -259,6 +258,13 @@ class Review extends \Magento\ImportExport\Model\Import\Entity\AbstractEntity
             if ($reviewCollection->getSize () > 0) {
                 continue;
             }
+            if ($row['status'] != 1 && $row['status'] != 2 && $row['status'] != 3) {
+                continue;
+            }
+            if (empty($row['email']) || empty($row['nickname']) || empty($row['title']) || empty($row['detail']) || empty($row['create_at'])) {
+                continue;
+            }
+            $review = $this->prepareReview ($row);
             if ($this->emailValid ($row['email'])) {
                 if (!empty($row['email']) && ($this->getUserId ($row['email']) != null)) {
                     $review->setCustomerId ($this->getUserId ($row['email']));
@@ -266,12 +272,7 @@ class Review extends \Magento\ImportExport\Model\Import\Entity\AbstractEntity
             } else {
                 continue;
             }
-            if ($row['status'] != 1 && $row['status'] != 2 && $row['status'] != 3) {
-                continue;
-            }
-            if (empty($row['email']) || empty($row['nickname']) || empty($row['title']) || empty($row['detail']) || empty($row['create_at'])) {
-                continue;
-            }
+
             $review->save ();
         }
     }

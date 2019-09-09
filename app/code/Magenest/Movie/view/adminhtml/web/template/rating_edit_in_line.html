@@ -1,0 +1,54 @@
+<style>
+    [type*='radio'] {
+        display: none !important;
+    }
+
+    .hoverStar {
+        color: rgb(255, 51, 0) !important;
+    }
+
+    .checkStar {
+        color: black !important;
+    }
+</style>
+<div class="admin__field-control">
+    <label style="font-size: 14px; color: rgb(204, 204, 204)"
+           data-bind="event:{ mouseover: mouseOver1, mouseout: mouseOut1}, click: click1,
+                        css:{ hoverStar: isHover1, checkStar: isCheck1}">
+        <input type="radio" name="ratings" id="Price_1" value="1" aria-required="true"
+               data-bind="checked: editRatingValue"/>
+        &#9733;
+    </label>
+
+    <label style="font-size: 14px; color: rgb(204, 204, 204)"
+           data-bind="event:{ mouseover: mouseOver2, mouseout : mouseOut2}, click: click2,
+                        css:{ hoverStar: isHover2, checkStar: isCheck2}">
+        <input type="radio" name="ratings" id="Price_2" value="2" aria-required="true"
+               data-bind="checked: editRatingValue"/>
+        &#9733;
+    </label>
+
+    <label style="font-size: 14px; color: rgb(204, 204, 204)"
+           data-bind="event:{ mouseover: mouseOver3, mouseout : mouseOut3}, click: click3,
+                        css:{ hoverStar: isHover3, checkStar: isCheck3}">
+        <input type="radio" name="ratings" id="Price_3" value="3" aria-required="true"
+               data-bind="checked: editRatingValue"/>
+        &#9733;
+    </label>
+
+    <label style="font-size: 14px; color: rgb(204, 204, 204)"
+           data-bind="event:{ mouseover: mouseOver4, mouseout : mouseOut4}, click: click4,
+                        css:{ hoverStar: isHover4, checkStar: isCheck4}">
+        <input type="radio" name="ratings" id="Price_4" value="4" aria-required="true"
+               data-bind="checked: editRatingValue"/>
+        &#9733;
+    </label>
+
+    <label style="font-size: 14px; color: rgb(204, 204, 204)"
+           data-bind="event:{ mouseover: mouseOver5, mouseout : mouseOut5}, click: click5,
+                        css:{ hoverStar: isHover5, checkStar: isCheck5}">
+        <input type="radio" name="ratings" id="Price_5" value="5" aria-required="true"
+               data-bind="checked: editRatingValue"/>
+        &#9733;
+    </label>
+</div>
